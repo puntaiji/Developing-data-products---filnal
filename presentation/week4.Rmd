@@ -76,7 +76,8 @@ when users change input elements in sidebar, server will runs
 
 ## Source Code
 
-The source code provide hear.
+The source code provide here
+[https://github.com/puntaiji/Developing-data-products---final](https://github.com/puntaiji/Developing-data-products---final)
 
 
 
