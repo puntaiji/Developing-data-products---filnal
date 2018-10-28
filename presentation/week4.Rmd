@@ -1,0 +1,82 @@
+---
+title: "Thailand Lottery Results Prediction"
+subtitle : "web application reproducible pitch"
+author: "Chonlatit Prateepmanovong"
+date: "28 October 2018"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(dplyr)
+library(ggplot2)
+input <- list(year = numeric(),result = numeric())
+input$year = c(2000,2018)
+input$result = c(0,99)
+```
+
+## Introduction
+
+The web application is for predicting Thailand lottery results with linear regression.  
+Link : [https://puntaiji.shinyapps.io/thailand_lottery_results_prediction/](https://puntaiji.shinyapps.io/thailand_lottery_results_prediction/)  
+
+**Data**  
+
+Thailand Lottery results in 2 digits (smallest prize) from 1990-04-16 to 2018-10-16 
+
+**Input**  
+
+* Data selection  
+  subset the data for exploration and training model.  
+  -*result* range  
+  -*year* range
+
+* Prediction set  
+  -*date* : set the date to predict result.
+  -*tolerance* : set the acceptable tolerance. For example, tolerance is 15 that mean predicted result that will appear in *date ± 15* will be displayed
+  
+**Output**
+
+* Graph of data to explore
+* Predicted lottery results 
+
+
+## Data
+
+Thailand lottery results data. 
+Results and Dates are provided.
+```{r data, echo = TRUE}
+data_lotto <- read.table("data_lotto_two.txt",sep= "\t",header = T,colClasses = "character")
+data_lotto$date <- as.Date(data_lotto$date,origin = "1970-01-01")
+head(data_lotto,n=10)
+nrow(data_lotto)
+```
+
+
+## ui.R and server.R
+
+###ui.R###  
+***input (in Sidebar)***  
+Recieve inputs from users  
+
+1. result and year ranges for subset data (sliderInput)  
+2. prediction date (dateInput) with tolerance (sliderInput)  
+
+***output (in Main panel)***  
+There are 2 tabs shows  
+
+1. Exploration graph of subset data  
+2. Graph and Table Predicted results which will appear in input date with tolerance   
+
+###server.R###  
+when users change input elements in sidebar, server will runs
+
+1. subset  data from input result and year ranges and then show on the exploration graph
+2. training subset of data by each results with linear regression, one model for each result. Then, the next appearance dates of each result are predicted. Outputs show the graphs and table of results which their predicted next appearance dates match input date and tolerance from ui.R.
+
+## Source Code
+
+The source code provide hear.
+
+
+
