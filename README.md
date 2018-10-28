@@ -1,2 +1,2 @@
-# Developing-data-products---filnal
-Final code for  Developing data products course assignment.
+# Developing data products final
+Final code for Developing data products course assignment.
